@@ -8,9 +8,11 @@
 <head>
 	<title>Company Slots Availability</title>
 	<script type="text/javascript" src="./js/jquery-2.2.0.min.js"></script>
+    <link href="./css/bootstrap.min.css"
+    rel="stylesheet">
 </head>
 <body>
-	<table id="dataTable">
+	<table id="dataTable" class="table table-striped table-bordered">
 	</table>
 	<script type="text/javascript">
 		window.setInterval(function(){
