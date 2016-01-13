@@ -21,7 +21,7 @@
     <title>
       .::Job Fair Registration::.
     </title>
-    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
+    <link href="./css/bootstrap.min.css"
     rel="stylesheet">
     <script type="text/javascript">
       function optselected(ele)
@@ -98,9 +98,9 @@
         </h1>
       </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+    <script src="./js/jquery-2.2.0.min.js">
     </script>
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js">
+    <script src="./js/bootstrap.min.js">
     </script>
     <div class="well">
       <div class="row">
@@ -312,7 +312,7 @@ END;
             </form>
           </div>
         </div>
-        <div class="col-md4 col-md-4" style="">
+        <div class="col-md-4">
           <h3 class="text-center">
             Company Registration Status
           </h3>
