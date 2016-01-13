@@ -312,7 +312,7 @@ END;
             </form>
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-2" style="display: block; float: right;">
           <h3 class="text-center">
             Company Registration Status
           </h3>
