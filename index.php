@@ -1,4 +1,16 @@
+
 <!DOCTYPE html>
+
+<?php
+  require_once('./connect.inc.php');
+
+  if(isset($_POST['name']))
+  {
+    mysql_query("INSERT INTO `participant` VALUES (NULL, '".$_POST['name']."', '".$_POST['sex']."', '".$_POST['dob']."', '".$_POST['college']."', '".$_POST['course']."', '".$_POST['specialization']."', '".$_POST['year']."', '".$_POST['x-percentage']."', '".$_POST['x-board']."', '".$_POST['xii-percentage']."', '".$_POST['xii-board']."', '".$_POST['degree-percentage']."', '".$_POST['backlogs']."', '".$_POST['phone']."', '".$_POST['email']."', '".$_POST['c1']."', '".$_POST['c2']."', '".$_POST['c3']."', '".$_POST['c4']."', '".$_POST['c5']."')");
+    unset($_POST['name']);
+  }
+
+?>
 <html lang="en">
   
   <head>
@@ -14,25 +26,27 @@
     <script type="text/javascript">
       function optselected(ele)
       {
-        var called, c1, c2, c3, c4, c5, tc, i, base, eid, selected, j;
+        var called, c1, c2, c3, c4, c5, tc, i, base, eid, j;
         called = ele.id;
-        tc = 1;
+        tc = <?php
+            $q = mysql_query("SELECT count(*) FROM `companies`");
+            echo mysql_fetch_array($q)[0];
+        ?>;
         c1 = document.getElementById('c1');
         c2 = document.getElementById('c2');
         c3 = document.getElementById('c3');
         c4 = document.getElementById('c4');
         c5 = document.getElementById('c5');
 
-        if(called == 'c1')
-          selected = c1.value;
-        else if(called == 'c2')
-          selected = c2.value;
-        else if(called == 'c3')
-          selected = c3.value;
-        else if(called == 'c4')
-          selected = c4.value;
-        else
-          selected = c5.value;
+        var selectedc1, selectedc2, selectedc3, selectedc4, selectedc5;
+
+        selectedc1 = c1.value;
+        selectedc2 = c2.value;
+        selectedc3 = c3.value;
+        selectedc4 = c4.value;
+        selectedc5 = c5.value;
+
+        var k, now;
 
         for(j = 1; j <= 5; j++)
         {
@@ -40,11 +54,37 @@
           for(i = 1; i <= tc; i++)
           {
             eid = base.concat(i.toString());
-            if((document.getElementById(eid).value == selected) && (selected != 'NA'))
-              document.getElementById(eid).disabled = true;
-            else
-              document.getElementById(eid).disabled = false;
-          } 
+            document.getElementById(eid).disabled = false;
+          }
+        }
+
+        for(k=1; k<=5; k++)
+        {
+          if(k==1)
+            now = selectedc1;
+          else if(k==2)
+            now = selectedc2;
+          else if(k==3)
+            now = selectedc3;
+          else if(k==4)
+            now = selectedc4
+          else
+            now = selectedc5;
+
+          for(j = 1; j <= 5; j++)
+          {
+            if(j==k)
+              continue;
+
+            base = 'c'.concat(j.toString(), 'op');
+            for(i = 1; i <= tc; i++)
+            {
+              eid = base.concat(i.toString());
+              if((document.getElementById(eid).value == now))
+                document.getElementById(eid).disabled = true;
+            } 
+
+          }
         }
       }
     </script>
@@ -69,7 +109,7 @@
             Enter the following participant details.
           </h3>
           <div class="container">
-            <form>
+            <form method="POST" action="" name="registrationForm">
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Participant Name" name="name">
               </div>
@@ -133,9 +173,25 @@
                   <option value="NA" id="c1na">
                     NA
                   </option>
-                  <option value="GMG" id="c1op1">
-                    GMG
-                  </option>
+                  <?php
+
+                    $q = mysql_query("SELECT `name` FROM `companies`");
+
+                    $temp = $q;
+                    $count = 0;
+
+                    while ($row = mysql_fetch_array($q))
+                    {
+                        $count++;
+                        $n = $row[0];
+
+                        echo <<<END
+                          <option value="$n" id="c1op$count">
+                            $n
+                           </option>
+END;
+                    }
+                  ?>
                 </select>
               </div>
               <div class="form-group">
@@ -146,9 +202,24 @@
                   <option value="NA" id="c2na">
                     NA
                   </option>
-                  <option value="GMG" id="c2op1">
-                    GMG
-                  </option>
+                  <?php
+                      mysql_data_seek($q, 0);
+
+                      $count = 0;
+
+                    while ($row = mysql_fetch_array($q))
+                    {
+                        $count++;
+                        $n = $row[0];
+
+                        echo <<<END
+                          <option value="$n" id="c2op$count">
+                            $n
+                           </option>
+END;
+                    }
+
+                  ?>
                 </select>
               </div>
               <div class="form-group">
@@ -159,9 +230,24 @@
                   <option value="NA" id="c3na">
                     NA
                   </option>
-                  <option value="GMG" id="c3op1">
-                    GMG
-                  </option>
+ <?php
+                      mysql_data_seek($q, 0);
+
+                      $count = 0;
+
+                    while ($row = mysql_fetch_array($q))
+                    {
+                        $count++;
+                        $n = $row[0];
+
+                        echo <<<END
+                          <option value="$n" id="c3op$count">
+                            $n
+                           </option>
+END;
+                    }
+
+                  ?>
                 </select>
               </div>
               <div class="form-group">
@@ -172,9 +258,24 @@
                   <option value="NA" id="c4na">
                     NA
                   </option>
-                  <option value="GMG" id="c4op1">
-                    GMG
-                  </option>
+ <?php
+                      mysql_data_seek($q, 0);
+
+                      $count = 0;
+
+                    while ($row = mysql_fetch_array($q))
+                    {
+                        $count++;
+                        $n = $row[0];
+
+                        echo <<<END
+                          <option value="$n" id="c4op$count">
+                            $n
+                           </option>
+END;
+                    }
+
+                  ?>
                 </select>
               </div>
               <div class="form-group">
@@ -185,9 +286,24 @@
                   <option value="NA" id="c5na">
                     NA
                   </option>
-                  <option value="GMG" id="c5op1">
-                    GMG
-                  </option>
+ <?php
+                      mysql_data_seek($q, 0);
+
+                      $count = 0;
+
+                    while ($row = mysql_fetch_array($q))
+                    {
+                        $count++;
+                        $n = $row[0];
+
+                        echo <<<END
+                          <option value="$n" id="c5op$count">
+                            $n
+                           </option>
+END;
+                    }
+
+                  ?>
                 </select>
               </div>
               <button type="submit" class="btn btn-primary">
@@ -196,13 +312,11 @@
             </form>
           </div>
         </div>
-        <div class="col-md4 col-md-4" style="display: block;">
+        <div class="col-md4 col-md-4" style="">
           <h3 class="text-center">
             Company Registration Status
           </h3>
-          <p>
-            Content
-          </p>
+          <iframe src="./status.php" style="width:100%;"></iframe>
         </div>
       </div>
     </div>
