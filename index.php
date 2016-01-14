@@ -8,6 +8,16 @@
   {
     mysql_query("INSERT INTO `participant` VALUES (NULL, '".$_POST['name']."', '".$_POST['sex']."', '".$_POST['dob']."', '".$_POST['college']."', '".$_POST['course']."', '".$_POST['specialization']."', '".$_POST['year']."', '".$_POST['x-percentage']."', '".$_POST['x-board']."', '".$_POST['xii-percentage']."', '".$_POST['xii-board']."', '".$_POST['degree-percentage']."', '".$_POST['backlogs']."', '".$_POST['phone']."', '".$_POST['email']."', '".$_POST['c1']."', '".$_POST['c2']."', '".$_POST['c3']."', '".$_POST['c4']."', '".$_POST['c5']."')");
     unset($_POST['name']);
+    if($_POST['c1'] != "NA")
+      mysql_query("UPDATE `companies` SET `available` = `available` - 1 WHERE name = '".$_POST['c1']."'");
+    if($_POST['c2'] != "NA")
+      mysql_query("UPDATE `companies` SET `available` = `available` - 1 WHERE name = '".$_POST['c2']."'");
+    if($_POST['c3'] != "NA")
+      mysql_query("UPDATE `companies` SET `available` = `available` - 1 WHERE name = '".$_POST['c3']."'");
+    if($_POST['c4'] != "NA")
+      mysql_query("UPDATE `companies` SET `available` = `available` - 1 WHERE name = '".$_POST['c4']."'");
+    if($_POST['c5'] != "NA")
+      mysql_query("UPDATE `companies` SET `available` = `available` - 1 WHERE name = '".$_POST['c5']."'");
   }
 
 ?>
