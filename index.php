@@ -39,7 +39,7 @@
         var called, c1, c2, c3, c4, c5, tc, i, base, eid, j;
         called = ele.id;
         tc = <?php
-            $q = mysql_query("SELECT count(*) FROM `companies`");
+            $q = mysql_query("SELECT count(*) FROM `companies` WHERE `available` > 0");
             echo mysql_fetch_array($q)[0];
         ?>;
         c1 = document.getElementById('c1');
@@ -185,7 +185,7 @@
                   </option>
                   <?php
 
-                    $q = mysql_query("SELECT `name` FROM `companies`");
+                    $q = mysql_query("SELECT `name` FROM `companies` WHERE `available` > 0");
 
                     $temp = $q;
                     $count = 0;
