@@ -20,8 +20,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>
+      .::View Candidates::.
     </title>
-    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
+    <link href="./css/bootstrap.min.css"
     rel="stylesheet">
   </head>
   
@@ -33,11 +34,9 @@
         </h1>
       </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"
-    >
+    <script src="./js/jquery-2.2.0.min.js">
     </script>
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"
-    >
+    <script src="./js/bootstrap.min.js">
     </script>
     <div class="well">
       <div class="row">
