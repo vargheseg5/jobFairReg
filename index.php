@@ -297,6 +297,7 @@ END;
                     NA
                   </option>
  <?php
+
                       mysql_data_seek($q, 0);
 
                       $count = 0;
@@ -327,6 +328,43 @@ END;
             Company Registration Status
           </h3>
           <iframe src="./status.php" style="width:100%;"></iframe>
+
+
+            <h3 class="text-center">
+            Company Registration
+          </h3>
+          <form method="POST" action="./candidates.php">
+            <div class="form-group">
+              <label>
+                Select Company
+              </label>
+              <select class="form-control" name="company">
+                <?php
+                      $s = mysql_query("SELECT `name` FROM `companies`");
+
+                      $count = 0;
+
+                    while ($row = mysql_fetch_array($s))
+                    {
+                        $count++;
+                        $n = $row[0];
+
+                        echo <<<END
+                          <option value="$n" id="cselect$count">
+                            $n
+                           </option>
+END;
+                    }
+
+                  ?>
+              </select>
+            </div>
+          <button type="submit" class="btn btn-success">
+            Submit
+          </button>
+          </form>
+
+
         </div>
       </div>
     </div>
